@@ -26,12 +26,12 @@ var nome_lista = document.getElementById('nome_lista');
 var list_created = document.getElementById('list_created');
 var upload_exame = document.getElementById('upload_exame');
 var file_exame=document.getElementById('file_exame');
-var cameraSVG=document.getElementById('cameraSVG');
+var camera_svg=document.getElementById('camera_svg');
 var inserir_upload=document.getElementById('inserir_upload')
 var exames=document.getElementById('exames')
 
 window.addEventListener('click', function(event) {
-    if (/*event.target !== lista_suspensa && */event.target !== btn_menu && event.target !== modal_corpo && event.target !== add && event.target !== nome_lista && event.target !== pastas_tipos_exames && event.target !== nome_lista && event.target !== list_created && event.target !== upload_exame && event.target !== file_exame && event.target !== inserir_upload&& event.target !== cameraSVG) {
+    if (/*event.target !== lista_suspensa && */event.target !== btn_menu && event.target !== modal_corpo && event.target !== add && event.target !== nome_lista && event.target !== pastas_tipos_exames && event.target !== nome_lista && event.target !== list_created && event.target !== upload_exame && event.target !== file_exame && event.target !== inserir_upload&& event.target !== camera_svg) {
         /*lista_suspensa.style.display = "none";*/
         modal_corpo.style.display = 'none';
         nome_lista.style.display='none';
@@ -42,7 +42,7 @@ window.addEventListener('click', function(event) {
         file_exame.style.display='none';
         inserir_upload.style.display='none';
         exames.style.display='none';
-        cameraSVG.style.display='none';
+        camera_svg.style.display='none';
 
         document.getElementById('msg_inicial').style.display = 'block';
 
@@ -382,7 +382,7 @@ function exibirListasSalvas() {
     });
     
     // abrir câmera
-    var cameraSVG = document.getElementById('camera-svg');
+    var cameraSVG = document.getElementById('camera_svg');
 
         // Adicione um ouvinte de eventos de clique
         cameraSVG.addEventListener('click', function () {
