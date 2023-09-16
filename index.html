@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="App de criação de prontuário e organização de exames médicos">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="manifest" href="manifest.json">
+    <title>MedFile</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <picture>
+                <source media="(max-width:750px)" srcset="imgp.png" type="image/png">
+                <source media="(max-width:1050px)" srcset="imgp.png" type="image/png">
+                <img src="imgm.png" alt="ícone do app">
+            </picture>
+            <button>
+                <svg id="btn-menu" width="24" height="24" viewBox="0 0 32 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1.96317 2.13703H30.6939C31.4122 2.13703 31.9999 1.7868 31.9999 1.06853C31.9999 0.350261 31.4122 3.05176e-05 30.6939 3.05176e-05H1.96317C1.2449 3.05176e-05 0.657227 0.350261 0.657227 1.06853C0.657227 1.7868 1.2449 2.13703 1.96317 2.13703ZM30.6939 21.37H1.96317C1.2449 21.37 0.657227 21.4828 0.657227 22.2011C0.657227 22.9193 1.2449 23.507 1.96317 23.507H30.6939C31.4122 23.507 31.9999 23.1568 31.9999 22.4385C31.9999 21.7072 31.4122 21.37 30.6939 21.37ZM30.6939 10.685H1.96317C1.2449 10.685 0.657227 11.0353 0.657227 11.7535C0.657227 12.4718 1.2449 12.822 1.96317 12.822H30.6939C31.4122 12.822 31.9999 12.4718 31.9999 11.7535C31.9999 11.0222 31.4122 10.685 30.6939 10.685Z" fill="#1C1C1C" aria-label="Menu"></path>
+                </svg>
+            </button>
+
+            <ul id="lista_suspensa" style="display: none;">
+                <li>
+                    <a href="#" class="list" id="link-sobre_app">
+                        SOBRE O APP
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+        <div id="sobre_app-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close" id="fechar-sobre_app">&times;</span>
+                <ul id="dadosapp">
+                    <hr>
+                    <strong>Dados do app:</strong> 
+                    <hr>                 
+                    <li class="linha_sobre_app">Nome: MedFile</li class="linha_sobre_app">
+                    <li class="linha_sobre_app">Versão 1.0.0</li class="linha_sobre_app">
+                    <li class="linha_sobre_app">Criado por: Renata Veras Venturim</li class="linha_sobre_app">
+                    <hr>
+                    <strong>Funções:</strong> 
+                    <hr>                 
+                    <li class="linha_sobre_app">✅Inserir exames médicos</li class="linha_sobre_app">
+                    <li class="linha_sobre_app">✅Organizar exames em pastas e tipos</li>
+                </ul>            
+            </div>
+        </div>
+        <div id="msg_inicial" style="padding-right: 100.000;padding-left: 100px;padding-right: 100px;">
+            <picture>
+                <source media="(max-width:750px)" srcset="iconep.jpg" type="image/png">
+                <source media="(max-width:1050px)" srcset="iconep.jpg" type="image/png">
+                <img src="iconem.jpg" alt="ícone do app">
+            </picture>
+            <p id="frase_inicial">Toque no botão + para criar seu prontuário médico</p>
+        </div>
+        <div id="nome_lista" class="modal-content" style="display: none;">
+            <span class="close" id="fechar-lista-nome">×</span>
+            <h2>Insira o nome do seu prontuário!</h2>
+            <input id="input_nome" type="text" required placeholder="Dica: Hipotiroidismo">
+            <br><input type="button" id="btn-nome" value="CRIAR LISTA" class="btn">
+        </div>
+<!------------------------------------------------------------->
+        <!--div referente a tipos de exames-->
+        <div id="pastas_tipos_exames" style="display: none;">
+            <h3>
+                Selecione o tipo de exame a ser inserido:
+            </h3>
+            <div class="pasta">
+                <h3>Exames de sangue</h3>
+            </div>
+    
+            <div class="pasta">
+                <h3>Exames de imagem</h3>
+            </div>
+        </div>
+
+        <!--div referente a nome do tipo de exame a ser criado-->
+        <div id="nome_tipo_exame" class="hidden" style="display: none;">
+            <input type="text" id="nome_exame" placeholder="Nome do exame">
+            <button id="criar_pasta" class="btn">Criar pasta</button>
+        </div>
+        
+        <!--div referente a upload de exames-->
+        <div id="upload_exame" style="display: none;">
+            <svg id="camera-svg" xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+                <circle cx="32" cy="32" r="30" stroke="black" stroke-width="2" fill="none" />
+                <path d="M32 48c-7.718 0-14-6.282-14-14s6.282-14 14-14 14 6.282 14 14-6.282 14-14 14zm0-26c-5.523 0-10 4.477-10 10s4.477 10 10 10 10-4.477 10-10-4.477-10-10-10z" stroke="black" stroke-width="2" fill="none" />
+                <circle cx="32" cy="32" r="4" stroke="black" stroke-width="2" fill="none" />
+            </svg>
+              
+            <input type="file" id="file_exame">
+            <button id="inserir_upload" class="btn">Inserir documento</button>
+        </div>
+
+        <!--lista de documentos de exames-->
+        <div id="relacao_exames" style="display: none;">
+            <ol id="exames"></ol>
+        </div>
+<!------------------------------------------------------------->
+
+        <div id="corpo" class="modal-content" style="display: none;">
+            <span class="close" id="fechar-corpo">×</span>
+            <span>
+                <label for="item_usuario1">QNT</label>
+                <br><input type="number" id="item_usuario1" placeholder="1,.." required>
+            </span>
+            <span>
+                <label for="item_usuario3">ITEM</label>
+                <br><input type="text" id="item_usuario3" name="item_usuario" placeholder="Arroz, feijão...">
+            </span>
+            <br>
+            <input type="button" class="f_botao" value="INSERIR">
+        </div>
+
+        
+        <div id="list_created" style="display: none;">
+            <span class="close" id="fechar-list_created">&times;</span>
+            <h1 style="font-size: 16px;">Exames:</h1>
+            <p id="total_compras" style="font-weight: bold;">
+            <ol id="f_lista" class="f_lista">
+                <li>EXAME 1</li>
+            </ol>
+            <button id="salvar-lista" class="btn">Salvar Lista</button>
+            <button id="excluir-list_created" class="btn">Excluir lista</button>
+        </div>
+
+        <div id="add-button">
+            <svg width="60" height="60" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="30" cy="30" r="25" fill="lightblue" />
+                <text id="add" x="50%" y="50%" font-size="24" text-anchor="middle" dy=".3em" fill="white">+</text>
+            </svg>
+        </div>
+    </main>
+    <script src="script.js"></script>
+    <script>
+        if (typeof navigator.serviceWorker !== 'undefined') {
+            navigator.serviceWorker.register('pwabuilder-sw.js')
+        }
+    </script>
+</body>
+</html>
