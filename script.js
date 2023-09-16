@@ -47,6 +47,10 @@ window.addEventListener('click', function(event) {
         document.getElementById('msg_inicial').style.display = 'block';
 
     }
+    if (event.target === camera_svg){
+        document.getElementById('msg_inicial').style.display = 'none';
+
+    }
 });
 
 var inputs = document.querySelectorAll('#corpo input');
@@ -395,12 +399,20 @@ function exibirListasSalvas() {
                         console.log("Câmera aberta com sucesso!");
 
                         // Exemplo: exibir o fluxo de vídeo em um elemento HTML de vídeo
-                        var videoElement = document.createElement('video');
+                        const videoElement = document.createElement('video');
                         videoElement.srcObject = stream;
                         videoElement.autoplay = true;
-                        document.body.appendChild(videoElement);
 
-                        // Importante: Certifique-se de fechar a câmera quando você não a estiver usando mais
+                        const uploadExameDiv = document.getElementById('upload_exame');
+
+                            // Verifique se o elemento upload_exame foi encontrado
+                            if (uploadExameDiv) {
+                                // Anexe o vídeo ao elemento upload_exame
+                                uploadExameDiv.appendChild(videoElement);
+                            } else {
+                                console.error("Elemento upload_exame não encontrado.");
+                            }
+                     // Importante: Certifique-se de fechar a câmera quando você não a estiver usando mais
                         // Para isso, você pode adicionar um botão "Fechar Câmera" ou realizar esta ação com base no seu fluxo de aplicativo.
                     })
                     .catch(function (error) {
