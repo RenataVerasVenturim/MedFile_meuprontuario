@@ -347,3 +347,12 @@ input[type="text"] {
 .hidden {
     display: none;
 }
+#camera-container {
+    position: absolute;
+    z-index: 1000; /* Defina um valor de z-index maior aqui */
+}
+
+video{
+    max-height: 300px;
+    max-width: 300px;
+}
