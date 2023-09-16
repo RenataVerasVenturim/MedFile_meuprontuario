@@ -27,11 +27,12 @@ var list_created = document.getElementById('list_created');
 var upload_exame = document.getElementById('upload_exame');
 var file_exame=document.getElementById('file_exame');
 var camera_svg=document.getElementById('camera_svg');
-var inserir_upload=document.getElementById('inserir_upload')
-var exames=document.getElementById('exames')
+var inserir_upload=document.getElementById('inserir_upload');
+var exames=document.getElementById('exames');
+var trocarCamera=document.getElementById('trocarCamera');
 
 window.addEventListener('click', function(event) {
-    if (/*event.target !== lista_suspensa && */event.target !== btn_menu && event.target !== modal_corpo && event.target !== add && event.target !== nome_lista && event.target !== pastas_tipos_exames && event.target !== nome_lista && event.target !== list_created && event.target !== upload_exame && event.target !== file_exame && event.target !== inserir_upload&& event.target !== camera_svg) {
+    if (/*event.target !== lista_suspensa && */event.target !== btn_menu && event.target !== modal_corpo && event.target !== add && event.target !== nome_lista && event.target !== pastas_tipos_exames && event.target !== nome_lista && event.target !== list_created && event.target !== upload_exame && event.target !== file_exame && event.target !== inserir_upload&& event.target !== camera_svg && event.target !== inserir_upload&& event.target !== trocarCamera) {
         /*lista_suspensa.style.display = "none";*/
         modal_corpo.style.display = 'none';
         nome_lista.style.display='none';
@@ -43,6 +44,7 @@ window.addEventListener('click', function(event) {
         inserir_upload.style.display='none';
         exames.style.display='none';
         camera_svg.style.display='none';
+    
 
         document.getElementById('msg_inicial').style.display = 'block';
 
@@ -490,10 +492,48 @@ navigator.mediaDevices.enumerateDevices()
     .catch(function(error) {
         console.error('Erro ao enumerar dispositivos:', error);
     });
-    navigator.mediaDevices.getUserMedia({ video: { deviceId: { yourDeviceIdHere } } })
-    .then(function (stream) {
-        // Resto do seu código para manipular o stream de vídeo
+    navigator.mediaDevices.enumerateDevices()
+    .then(function(devices) {
+        devices.forEach(function(device) {
+            console.log('Dispositivo:', device.label, 'ID:', device.deviceId);
+        });
     })
-    .catch(function (error) {
-        console.error("Erro ao abrir a câmera:", error);
+    .catch(function(error) {
+        console.error('Erro ao enumerar dispositivos:', error);
     });
+
+//botão trocar câmera frontal x traseira
+let cameraAtiva = 'front'; // Inicialmente, a câmera frontal está ativa
+
+document.getElementById('trocarCamera').addEventListener('click', function () {
+    // Verifique qual câmera está ativa e troque para a outra
+    if (cameraAtiva === 'front') {
+        cameraAtiva = 'back'; // Troque para a câmera traseira
+    } else {
+        cameraAtiva = 'front'; // Troque de volta para a câmera frontal
+    }
+    
+    // Chame uma função para abrir a câmera com base na câmera ativa
+    abrirCamera(cameraAtiva);
+});
+
+function abrirCamera(camera) {
+    // Verifique se o navegador suporta a API MediaDevices
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        const constraints = {
+            video: {
+                facingMode: camera === 'back' ? 'environment' : 'user'
+            }
+        };
+        
+        navigator.mediaDevices.getUserMedia(constraints)
+            .then(function (stream) {
+                // Resto do código para exibir o stream de vídeo, etc.
+            })
+            .catch(function (error) {
+                console.error('Erro ao abrir a câmera:', error);
+            });
+    } else {
+        console.error('Seu navegador não suporta a API MediaDevices.');
+    }
+}
