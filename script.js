@@ -475,4 +475,25 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
-        
+
+//camera traseira
+navigator.mediaDevices.enumerateDevices()
+    .then(function(devices) {
+        // Percorra a lista de dispositivos para encontrar a câmera traseira
+        devices.forEach(function(device) {
+            if (device.kind === 'videoinput' && device.label.toLowerCase().includes('back')) {
+                // Esta é a câmera traseira, você pode usar device.deviceId
+                console.log('Câmera traseira encontrada com deviceId:', device.deviceId);
+            }
+        });
+    })
+    .catch(function(error) {
+        console.error('Erro ao enumerar dispositivos:', error);
+    });
+    navigator.mediaDevices.getUserMedia({ video: { deviceId: { yourDeviceIdHere } } })
+    .then(function (stream) {
+        // Resto do seu código para manipular o stream de vídeo
+    })
+    .catch(function (error) {
+        console.error("Erro ao abrir a câmera:", error);
+    });
