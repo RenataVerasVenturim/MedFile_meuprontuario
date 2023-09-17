@@ -71,7 +71,7 @@ nav button {
     text-decoration: none;
     border-radius: 4px;
     transition: background-color 0.3s;
-    margin: 2px;
+    margin: 10px;
     border-radius: 5px;
     box-shadow: 2px 2px 2px rgb(2, 0, 0);
     cursor: pointer;
@@ -89,7 +89,10 @@ nav button {
     padding-right: 24px;
     padding-left: 24px;
 }
-
+.btn-excluir-grupo{
+    right: 18px;
+    position: fixed;
+}
 #btn-menu {
     display: inline-block;
     padding: 12px 24px;
@@ -235,6 +238,9 @@ main span {
     display: none;
     font-size: 16px;
 }
+#nome_doc_exame{
+    padding: 10px 50px;
+}
 
 .input_nome {
     text-align: center;
@@ -278,17 +284,31 @@ ol {
     list-style-type: none;
     padding:0px 0px;
 }
-.Grupo{
+.Grupo {
     background-color: rgb(19, 73, 91);
+    color: white;
+    cursor: pointer;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding-bottom: 6px;
+}
+
+.Tipo_de_exame {
+    background-color: #fff;
+    color: #000;
+    margin-top: 10px;
+    cursor: pointer;
+}
+.Arquivo {
+    background-color: rgb(46, 168, 209);
     color: white;
     padding: 6px 26px;
     margin-top: 10px;
     margin-bottom: 10px;
-    cursor: pointer;   
-    border:1px solid black;
-    border-radius: 10px;
-    height: 300px;
-    padding:6px 150px
+    cursor: pointer;
+}
+.data_exame{
+    padding: 10px 50px;
 }
 .imagem_inserida a{
         background-color: rgb(19, 73, 91);
@@ -316,6 +336,9 @@ ol {
 .f_botao:hover {
     padding: 8px 28px;
 }
+.Arquivo a{
+    color:white;
+}
 
 .minhas_listas_salvas{
     display: inline-block;
@@ -342,6 +365,10 @@ ol {
     position: fixed;
     bottom: 20px;
     right: 20px;
+}
+#file_exame{
+    margin:15px 2px;
+
 }
 .pasta {
     background-color: #f0f0f0;

@@ -13,56 +13,6 @@ btn_menu.addEventListener("click", function() {
     }
 });
 
-
-// Fechar itens se o usuário clicar fora deles
-//var lista_suspensa = document.getElementById("lista_suspensa");
-/*var add = document.getElementById('add');
-var nome_lista = document.getElementById('nome_lista');
-var btn_menu = document.getElementById("btn-menu");
-var pastas_tipos_exames=document.getElementById("pastas_tipos_exames");
-var nome_lista = document.getElementById('nome_lista');
-var list_created = document.getElementById('list_created');
-var upload_exame = document.getElementById('upload_exame');
-var file_exame=document.getElementById('file_exame');
-var camera_svg=document.getElementById('camera_svg');
-var inserir_upload=document.getElementById('inserir_upload');
-var exames=document.getElementById('exames');
-var trocarCamera=document.getElementById('trocarCamera');
-var data_exame=document.getElementById('data_exame');
-var nome_doc_exame=document.getElementById('nome_doc_exame')
-var salvar_button=document.getElementById('salvar_button')
-var botaoExcluir=document.getElementsByClassName('botaoExcluir')
-
-window.addEventListener('click', function(event) {
-    if (!isInsideElementWithClass(event.target, 'botaoExcluir')) {
-        // Código para ocultar elementos
-        nome_lista.style.display = 'none';
-        pastas_tipos_exames.style.display = 'none';
-        nome_lista.style.display = 'none';
-        list_created.style.display = 'none';
-        file_exame.style.display = 'none';
-        inserir_upload.style.display = 'none';
-        exames.style.display = 'none';
-        /*camera_svg.style.display='none';*/
-        /*upload_exame.style.display = 'none';
-        data_exame.style.display = 'none';
-        nome_doc_exame.style.display = 'none';
-        botaoExcluir.style.display = 'none';
-        salvar_button = 'none';
-
-        document.getElementById('msg_inicial').style.display = 'block';
-    }
-    if (event.target === camera_svg) {
-        document.getElementById('msg_inicial').style.display = 'none';
-    }
-    if (event.target === salvar_button) {
-        document.getElementById('upload_exame').style.display = 'none';
-        document.getElementById('relacao_exames').style.display = 'none';
-        document.getElementById('grupos').style.display = 'block';
-    }
-
-}); */
-
 function isInsideElementWithClass(element, className) {
     while (element) {
         if (element.classList && element.classList.contains(className)) {
@@ -86,7 +36,7 @@ function isInsideElementWithClass(element, className) {
         }
         function atribuirEventoExcluir() {
             var botoesExcluir = document.querySelectorAll('.botao-excluir');
-        
+        fechar
             botoesExcluir.forEach(function(botao) {
                 botao.addEventListener('click', function() {
                     var liItem = this.parentElement;
@@ -96,24 +46,37 @@ function isInsideElementWithClass(element, className) {
         }
 /*---------------------------------------------------------------- */
 /*evento ao clicar no botão adicionar na tela inicial*/
-document.getElementById('add').addEventListener('click', function() {
+document.getElementById('add-button').addEventListener('click', function() {
     
         document.getElementById('nome_lista').style.display = 'block';
-        document.getElementById('pastas_tipos_exames').style.display = 'none';
+        /*document.getElementById('pastas_tipos_exames').style.display = 'none';*/
         document.getElementById('msg_inicial').style.display = 'none';
 });
 /*---------------------------------------------------------------- */
+// --------------------FUNÇÃO "X" DE FECHAR NOS MODAIS-------------
+var close = document.getElementsByClassName('close');
 
-function fechar(){
-    document.getElementById('msg_inicial').style.display = 'block';
+for (var i = 0; i < close.length; i++) {
+    close[i].addEventListener('click', fechar);
 }
 
-var nome_lista = document.getElementById('nome_lista');
+function fechar() {
+    
+    var sobre_app_modal = document.getElementById('sobre_app-modal');
+    var nome_lista=document.getElementById('nome_lista');
+    /*var pastas_tipos_exames=document.getElementById('pastas_tipos_exames');*/
+    var upload_exame=document.getElementById('upload_exame');
+    
+       
+        sobre_app_modal.style.display = 'none';
+        nome_lista.style.display = 'none';  
+        /*pastas_tipos_exames.style.display='none'; */ 
+        upload_exame.style.display='none';
 
-nome_lista.addEventListener('click', function(event) {
-    event.stopPropagation();
-});
+    checkListaGruposVazia()
+}
 
+//-----------------------------------------------------------------
 var elementosFilhos = nome_lista.querySelectorAll('*');
 elementosFilhos.forEach(function(elemento) {
     elemento.addEventListener('click', function(event) {
@@ -126,62 +89,74 @@ var inputNome = document.getElementById('input_nome');
 var tituloLista = document.querySelector('#list_created h1');
 
 btnNome.addEventListener('click', function() {
+    
+// Apague todos os elementos filhos da lista com id "exames"
+const examesList = document.getElementById("exames");
+while (examesList.firstChild) {
+    examesList.removeChild(examesList.firstChild);
+}
+
     var nomeDaLista = inputNome.value;
 
     if (nomeDaLista.trim() !== '') {
         tituloLista.textContent = nomeDaLista;
         document.getElementById('nome_lista').style.display = 'none';
-        document.getElementById('pastas_tipos_exames').style.display = 'block';
+        /*document.getElementById('pastas_tipos_exames').style.display = 'block';*/
+        document.getElementById('upload_exame').style.display='block';
     } else {
         alert('Por favor, insira o nome da lista.');
     }
 });
+//-------------------------CLICAR FORA , MINIMIZA BLOCOS-----------
 
-window.addEventListener('click', function(event) {
-    var modal = document.getElementById('sobre_app-modal');
-    if (event.target === modal) {
-        modal.style.display = 'none';
+window.addEventListener("click", function (event) {
+    var sobre_app_modal = document.getElementById('sobre_app-modal');
+    var nome_lista = document.getElementById('nome_lista');
+    /*var pastas_tipos_exames = document.getElementById('pastas_tipos_exames');*/
+
+    if (event.target === sobre_app_modal || event.target === nome_lista /*|| event.target === pastas_tipos_exames*/) {
+        sobre_app_modal.style.display = 'none';
+        nome_lista.style.display = 'none';
+       /* pastas_tipos_exames.style.display = 'none';*/
+        lista_suspensa.style.display = 'none';
     }
+
+    checkListaGruposVazia();
 });
+
+//-----------------------------------------------------------------
 
 document.getElementById('link-sobre_app').addEventListener('click', function() {
     document.getElementById('sobre_app-modal').style.display = 'block';
 });
 
-document.getElementById('fechar-lista-nome').addEventListener('click', function() {
-    document.getElementById('nome_lista').style.display = 'none';
-    document.getElementById('input_nome').value="";
-    fechar();
-});
 
 
     /*quando clicar na pasta do tipo do exame a ser inserido, abrir pasta */
 
     document.addEventListener("DOMContentLoaded", function () {
-        var pastasTiposExames = document.getElementsByClassName('pasta');
-        var uploadExameDiv = document.getElementById('upload_exame');
-        var exames = document.getElementById('exames');
-    
-        for (var i = 0; i < pastasTiposExames.length; i++) {
-            pastasTiposExames[i].addEventListener('click', function () {
-                // Impede a propagação do evento de clique para evitar que o código do window seja executado
-                event.stopPropagation();
-    
-                // Verifique se a pasta está vazia (por exemplo, se não tem filhos)
-                var pasta = this;
-                if (exames.children.length === 0) { // Verifica se não há <li> dentro de <ol id="exames">
-                    // Defina o estilo de exibição para 'block'
-                    uploadExameDiv.style.display = 'block';
-                    pastas_tipos_exames.style.display='none';
-                    // Você pode fazer mais aqui, como atualizar o nome da pasta atual
-                } else {
-                    // A pasta não está vazia, então você pode implementar a lógica
-                    // para abrir a relação de exames da pasta que foram salvas
-                    // por exemplo, exibir uma lista de exames ou abrir outra página
-                }
-            });
-        }
-    });
+    var pastasTiposExames = document.getElementsByClassName('pasta');
+    var uploadExameDiv = document.getElementById('upload_exame');
+    var exames = document.getElementById('exames');
+    var msgInicial = document.getElementById('msg_inicial');
+
+    for (var i = 0; i < pastasTiposExames.length; i++) {
+        pastasTiposExames[i].addEventListener('click', function (event) {
+            checkListaGruposVazia();
+
+            // Verifique se a pasta está vazia (por exemplo, se não tem filhos)
+            var pasta = this;
+            if (exames.children.length === 0) { // Verifica se não há <li> dentro de <ol id="exames">
+                // Defina o estilo de exibição para 'block'
+                uploadExameDiv.style.display = 'block';
+                /*pastas_tipos_exames.style.display = 'none';*/
+                // Você pode fazer mais aqui, como atualizar o nome da pasta atual
+            } else {
+                // A pasta não está vazia, então implementar a lógica
+            }
+        });
+    }
+});
     
 
 //--------------------------------------------------------------
@@ -193,10 +168,28 @@ document.addEventListener("DOMContentLoaded", function () {
     const nomeDocInput = document.getElementById("nome_doc_exame");
     const dataInput = document.getElementById("data_exame");
     const salvarButton = document.getElementById("salvar_button"); 
-    const inputNome = document.getElementById("input_nome");
-
+    const inputNome = document.getElementById("input_nome");        const toggleButtons = document.querySelectorAll('.toggle-button');
+    
+        // Adicione um ouvinte de evento de clique a todos os botões de expansão/recuo
+        toggleButtons.forEach(function (button) {
+            button.addEventListener('click', function (event) {
+                const parentLi = this.parentNode; // Acesse o elemento <li> pai do botão clicado
+    
+                // Verifique se o <li> pai tem uma classe "expandido"
+                if (parentLi.classList.contains('expandido')) {
+                    // Se tiver, remova a classe para recolher a lista
+                    parentLi.classList.remove('expandido');
+                    this.textContent = '▼'; // Altere o texto do botão para "▼"
+                } else {
+                    // Se não tiver, adicione a classe para expandir a lista
+                    parentLi.classList.add('expandido');
+                    this.textContent = '▲'; // Altere o texto do botão para "▲"
+                }
+            });
+        });
     // Evento de clique para inserir o documento com nome e data
     inserirUploadButton.addEventListener("click", function () {
+
         // Impedir entrada vazia de arquivos
         if (fileExameInput.files.length > 0 && nomeDocInput.value !== "" && dataInput.value !== "") {
             const file = fileExameInput.files[0];
@@ -228,91 +221,110 @@ document.addEventListener("DOMContentLoaded", function () {
             // Exibir mensagem de erro se algum campo estiver vazio
             alert("Por favor, preencha todos os campos obrigatórios.");
         }
+        document.getElementById('msg_inicial').style.display='none';
     });
 //----------------------------SALVAR DOCS-------------------
-    // Evento de clique para salvar os dados no localStorage
-    salvarButton.addEventListener("click", function () {
-        // Obtenha o nome da pasta do usuário
-        const nomeDaPasta = inputNome.value.trim();
+// Evento de clique para salvar os dados no localStorage
+salvarButton.addEventListener("click", function () {
+    // Obtenha o nome da pasta do usuário
+    const nomeDaPasta = inputNome.value.trim();
 
-        // Verifique se o nome da pasta não está vazio
-        if (nomeDaPasta !== "") {
-            // Obtenha o conteúdo da lista <ol> com id "exames"
-            const examesItems = examesList.querySelectorAll("li");
+    // Verifique se o nome da pasta não está vazio
+    if (nomeDaPasta !== "") {
+        // Crie um novo item na lista de grupos com um link para abrir o conteúdo
+        const listaGrupos = document.getElementById("lista_grupos");
+        const novoGrupoItem = document.createElement("li");
 
-            // Crie um array para armazenar os itens da lista
-            const listaDeExames = [];
+        // Crie um botão de expansão/recolhimento
+        const toggleButton = document.createElement("button");
+        toggleButton.className = "toggle-button";
+        toggleButton.textContent = "▼";
+        //botão excluir inserido
+        const btn_excluir_grupo = document.createElement("button");
+        btn_excluir_grupo.className = "btn-excluir-grupo";
+        btn_excluir_grupo.textContent = "❌";
 
-            // Percorra os itens da lista e adicione seus textos ao array
-            examesItems.forEach(function (item) {
-                listaDeExames.push(item.textContent);
-            });
+        //atribuir função aos botões de excluir
+        btn_excluir_grupo.addEventListener("click", function () {
+            const confirmacao = confirm('Você realmente deseja excluir o grupo de documentos?');
 
-            // Converta o array em uma string JSON
-            const listaJSON = JSON.stringify(listaDeExames);
+            if (confirmacao) {
+                const arquivoASerExcluido = this.parentElement;
+                arquivoASerExcluido.remove();
 
-            // Salve a lista na pasta nomeada pelo usuário no localStorage
-            localStorage.setItem(nomeDaPasta, listaJSON);
+                checkListaGruposVazia();
+            }
+        });
 
-            // Limpe o campo de entrada do nome da pasta
-            inputNome.value = "";
 
-            // Exiba uma mensagem de sucesso ou faça qualquer outra ação necessária
-            alert("Exames salvos com sucesso na pasta " + nomeDaPasta);
+        // Coloque o nome da pasta diretamente dentro da <li>
+        novoGrupoItem.textContent = nomeDaPasta;
+        novoGrupoItem.className = 'Grupo';
+        
 
-            // Crie um novo item na lista de grupos com um link para abrir o conteúdo
-            const listaGrupos = document.getElementById("lista_grupos");
-            const novoGrupoItem = document.createElement("ol");
-            const linkParaConteudo = document.createElement("a");
-            linkParaConteudo.className="Grupo";
-            linkParaConteudo.textContent = nomeDaPasta;
-            linkParaConteudo.href = "#"; 
+        // Clone a estrutura do <ol id="exames">
+        const examesOlClone = document.getElementById("exames").cloneNode(true);
 
-                // Recupere o conteúdo da pasta no localStorage usando localStorage.getItem(nomeDaPasta)
-                const conteudoSalvo = localStorage.getItem(nomeDaPasta);
+        // Mude o id do clone para "Exames_relacionados"
+        examesOlClone.id = "Exames_relacionados";
 
-                // Verifique se há conteúdo na pasta
-                if (conteudoSalvo) {
-                    // Converta o conteúdo de volta para o formato adequado (por exemplo, uma matriz)
-                    const listaDeExamesSalva = JSON.parse(conteudoSalvo);
+        examesOlClone.style.display = 'none';
 
-                    // Aqui, você pode fazer o que quiser com o conteúdo salvo, como exibi-lo na página
-                    // Por exemplo, você pode criar uma lista e adicionar cada item da listaDeExamesSalva a ela.
-                    // Vou apenas exibir um alert com o conteúdo para fins de demonstração:
-                    alert("Conteúdo da pasta " + nomeDaPasta + ":\n" + listaDeExamesSalva.join("\n"));
-                } else {
-                    alert("A pasta " + nomeDaPasta + " está vazia.");
-                }
-            
-            novoGrupoItem.appendChild(linkParaConteudo);
-            listaGrupos.appendChild(novoGrupoItem);
-            
-            checkListaGruposVazia()
-        } else {
-            // Exiba uma mensagem de erro se o nome da pasta estiver vazio
-            alert("Por favor, insira um nome para a pasta.");
-        }
-    });
+        // Anexe os elementos clonados em uma estrutura de árvore
+        novoGrupoItem.appendChild(toggleButton); // Adicione o botão de expansão/recolhimento
+        novoGrupoItem.appendChild(btn_excluir_grupo);
+        novoGrupoItem.appendChild(examesOlClone);
+        listaGrupos.appendChild(novoGrupoItem);
 
-    function formatarDataBrasileira(data) {
-        // Divida a data em partes: ano, mês, dia
-        const partes = data.split('-');
+        // Adicione ouvintes de evento para os botões de expansão/recolhimento
+        toggleButton.addEventListener("click", function () {
+            toggleList(examesOlClone);
+        });
 
-        // Verifique se há três partes (ano, mês, dia)
-        if (partes.length === 3) {
-            const dia = partes[2];
-            const mes = partes[1];
-            const ano = partes[0];
+        // Adicione a classe "Arquivo" e remova a classe "imagem_inserida" da <li>
+        const imagensInseridasLi = examesOlClone.querySelectorAll("li.imagem_inserida");
+        imagensInseridasLi.forEach(function (imagemInseridaLi) {
+            imagemInseridaLi.classList.remove("imagem_inserida");
+            imagemInseridaLi.classList.add("Arquivo");
+        });
+        // Você pode continuar com o restante do seu código, como salvar no localStorage, limpar o campo de entrada, etc.
 
-            // Crie uma nova data no formato "dia/mês/ano"
-            const dataFormatada = dia + '-' + mes + '-' + ano;
-
-            return dataFormatada;
-        } else {
-            // Se o formato da data estiver incorreto, retorne a data original
-            return data;
-        }
+        checkListaGruposVazia();
+    } else {
+        // Exiba uma mensagem de erro se o nome da pasta estiver vazio
+        alert("Por favor, insira um nome para a pasta.");
     }
+});
+
+// Função para alternar a exibição de uma lista (expandir/recolher)
+function toggleList(lista) {
+    if (lista.style.display === "none" || lista.style.display === "") {
+        lista.style.display = "block";
+    } else {
+        lista.style.display = "none";
+    }
+}
+
+function formatarDataBrasileira(data) {
+    // Divida a data em partes: ano, mês, dia
+    const partes = data.split('-');
+
+    // Verifique se há três partes (ano, mês, dia)
+    if (partes.length === 3) {
+        const dia = partes[2];
+        const mes = partes[1];
+        const ano = partes[0];
+
+        // Crie uma nova data no formato "dia/mês/ano"
+        const dataFormatada = dia + '-' + mes + '-' + ano;
+
+        return dataFormatada;
+    } else {
+        // Se o formato da data estiver incorreto, retorne a data original
+        return data;
+    }
+}
+
 });
 
 //------------------------------------------------------------
@@ -425,16 +437,21 @@ function checkListaGruposVazia() {
 
     if (listaGrupos.children.length === 0) {
         msgInicial.style.display = 'block';
-        return true;
+        document.getElementById('grupos').style.display = 'none';
+
     } else { 
         msgInicial.style.display = 'none';
             document.getElementById('lista_grupos').style.display = 'block';
             
             document.getElementById('grupos').style.display = 'block';
             
-            document.getElementById('upload_exame').style.display = 'none';
             document.getElementById('relacao_exames').style.display = 'none';
+
         return false;
 
     }
 }
+//--------------------------------------------------------------
+
+
+

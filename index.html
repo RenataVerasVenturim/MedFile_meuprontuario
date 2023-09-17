@@ -60,60 +60,74 @@
             </picture>
             <p id="frase_inicial">Toque no botão + para criar seu prontuário médico</p>
         </div>
-        <div id="nome_lista" class="modal-content" style="display: none;">
-            <span class="close" id="fechar-lista-nome">×</span>
-            <h2>Insira o nome da sua pasta!</h2>
-            <input id="input_nome" type="text" required placeholder="Ex: Exames de 2023">
-            <br><input type="button" id="btn-nome" value="CRIAR LISTA" class="btn">
+        <div id="nome_lista" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close" id="fechar-lista-nome">×</span>
+                <h2>Insira o nome da sua pasta!</h2>
+                <input id="input_nome" type="text" placeholder="Ex: Exames de 2023" value="2023">
+                <br><input type="button" id="btn-nome" value="CRIAR LISTA" class="btn">
+            </div>
         </div>
+        
 <!------------------------------------------------------------->
         <!--div referente a tipos de exames-->
-        <div id="pastas_tipos_exames" style="display: none;">
-            <h3>
-                Selecione o tipo de exame a ser inserido:
-            </h3>
-            <div class="pasta">
-                <h3>Exames de sangue</h3>
+        <!--<div id="pastas_tipos_exames" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close" id="fechar-pastas_tipos_exames">×</span>
+                <h3>
+                    Selecione o tipo de exame a ser inserido:
+                </h3>
+                <div class="pasta">
+                    <h3>Exames de sangue</h3>
+                </div>
+        
+                <div class="pasta">
+                    <h3>Exames de imagem</h3>
+                </div>
             </div>
-    
-            <div class="pasta">
-                <h3>Exames de imagem</h3>
-            </div>
-        </div>
-
+        </div>-->
         <!--div referente a nome do tipo de exame a ser criado-->
+        
         <div id="nome_tipo_exame" class="hidden" style="display: none;">
             <input type="text" id="nome_exame" placeholder="Nome do exame">
             <button id="criar_pasta" class="btn">Criar pasta</button>
         </div>
         
         <!--div referente a upload de exames-->
-       <form id="upload_exame" style="display: none;">
-             <!--<svg id="camera_svg" xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
-                <circle cx="32" cy="32" r="30" stroke="black" stroke-width="2" fill="none" />
-                <path d="M32 48c-7.718 0-14-6.282-14-14s6.282-14 14-14 14 6.282 14 14-6.282 14-14 14zm0-26c-5.523 0-10 4.477-10 10s4.477 10 10 10 10-4.477 10-10-4.477-10-10-10z" stroke="black" stroke-width="2" fill="none" />
-                <circle cx="32" cy="32" r="4" stroke="black" stroke-width="2" fill="none" />
-            </svg>-->
-              
-            <br><input type="file" id="file_exame" required>
-            <br><label for="nome_doc_exame">
-                Nome do documento:
-            </label>
-            <br><input type="text" id="nome_doc_exame" required>
-            <br>Data do exame:<br>
-            <input type="date" id="data_exame" required>
-            <br>
-            <button id="inserir_upload" class="btn">Inserir documento</button>
-             <!--<button id="trocarCamera" class="btn">Trocar Câmera</button>-->
-        </form>
-
-        <div id="relacao_exames" style="display: none;">
-            <ol id="exames">
-            </ol>
-            <button id="salvar_button">Salvar</button>
+       <div id="upload_exame" class="modal" style="display: none;"> 
+        <form class="modal-content">
+            <span class="close" id="fechar-upload_exame">×</span>
+                <!--<svg id="camera_svg" xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+                    <circle cx="32" cy="32" r="30" stroke="black" stroke-width="2" fill="none" />
+                    <path d="M32 48c-7.718 0-14-6.282-14-14s6.282-14 14-14 14 6.282 14 14-6.282 14-14 14zm0-26c-5.523 0-10 4.477-10 10s4.477 10 10 10 10-4.477 10-10-4.477-10-10-10z" stroke="black" stroke-width="2" fill="none" />
+                    <circle cx="32" cy="32" r="4" stroke="black" stroke-width="2" fill="none" />
+                </svg>-->
+                
+                <br><input type="file" id="file_exame" required>
+                <br><label for="nome_doc_exame">
+                    Nome do documento:
+                </label>
+                <br><input type="text" id="nome_doc_exame" name="nome_doc_exame" required placeholder="Ex: Exame de sangue" value="EXAME DE SANGUE">
+                <br><label for="data_exame">
+                <br>Data do exame:<br>
+                </label>
+                <input type="date" id="data_exame" name="data_exame" required value="2023-09-17">
+                <br>
+                <button id="inserir_upload" name="inserir_upload" class="btn">Inserir documento</button>
+                <!--<button id="trocarCamera" class="btn">Trocar Câmera</button>-->
+                
+                <div id="relacao_exames" style="display: none;">
+                    <ol id="exames">
+                    </ol>
+                    <button id="salvar_button" class="btn">Salvar na pasta</button>
+                </div>
+                
+            </form>
         </div>
-        
         <div id="grupos" style="display: none;">
+            <h2>
+                PASTAS DE EXAMES:
+            </h2>
             <ol id="lista_grupos">
             </ol>
         </div>
