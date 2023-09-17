@@ -148,8 +148,10 @@ document.getElementById('link-sobre_app').addEventListener('click', function() {
     document.getElementById('sobre_app-modal').style.display = 'block';
 });
 
-document.getElementById('fechar-sobre_app').addEventListener('click', function() {
-    document.getElementById('sobre_app-modal').style.display = 'none';
+document.getElementById('fechar-lista-nome').addEventListener('click', function() {
+    document.getElementById('nome_lista').style.display = 'none';
+    document.getElementById('input_nome').value="";
+    fechar();
 });
 
 
