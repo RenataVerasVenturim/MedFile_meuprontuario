@@ -189,7 +189,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     // Evento de clique para inserir o documento com nome e data
     inserirUploadButton.addEventListener("click", function () {
-
+        
         // Impedir entrada vazia de arquivos
         if (fileExameInput.files.length > 0 && nomeDocInput.value !== "" && dataInput.value !== "") {
             const file = fileExameInput.files[0];
@@ -444,9 +444,8 @@ function checkListaGruposVazia() {
             document.getElementById('lista_grupos').style.display = 'block';
             
             document.getElementById('grupos').style.display = 'block';
-            
-            document.getElementById('relacao_exames').style.display = 'none';
-
+        
+            document.getElementById('relacao_exames').style.display='block';
         return false;
 
     }
