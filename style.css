@@ -276,19 +276,32 @@ p {
 
 ol {
     list-style-type: none;
+    padding:0px 0px;
 }
-
-.btn {
-    background-color: lightblue;
-    color: black;
+.Grupo{
+    background-color: rgb(19, 73, 91);
+    color: white;
     padding: 6px 26px;
     margin-top: 10px;
     margin-bottom: 10px;
-    cursor: pointer;
+    cursor: pointer;   
+    border:1px solid black;
+    border-radius: 10px;
+    height: 300px;
+    padding:6px 150px
 }
-
-.btn:hover {
-    padding: 8px 28px;
+.imagem_inserida a{
+        background-color: rgb(19, 73, 91);
+        color: white;
+        padding: 6px 26px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        cursor: pointer;   
+        border:1px solid black;
+        border-radius: 10px;
+}
+.imagem_inserida{
+    margin-bottom: 15px;
 }
 
 .f_botao {

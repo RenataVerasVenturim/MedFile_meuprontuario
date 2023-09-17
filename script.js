@@ -1,7 +1,6 @@
 /*JS Document */
 /*Objetivo: interação do menu */
 
-
 // Abrir
 var btn_menu = document.getElementById("btn-menu");
 var lista_suspensa = document.getElementById("lista_suspensa");
@@ -17,8 +16,7 @@ btn_menu.addEventListener("click", function() {
 
 // Fechar itens se o usuário clicar fora deles
 //var lista_suspensa = document.getElementById("lista_suspensa");
-var modal_corpo = document.getElementById('corpo');
-var add = document.getElementById('add');
+/*var add = document.getElementById('add');
 var nome_lista = document.getElementById('nome_lista');
 var btn_menu = document.getElementById("btn-menu");
 var pastas_tipos_exames=document.getElementById("pastas_tipos_exames");
@@ -30,153 +28,72 @@ var camera_svg=document.getElementById('camera_svg');
 var inserir_upload=document.getElementById('inserir_upload');
 var exames=document.getElementById('exames');
 var trocarCamera=document.getElementById('trocarCamera');
+var data_exame=document.getElementById('data_exame');
+var nome_doc_exame=document.getElementById('nome_doc_exame')
+var salvar_button=document.getElementById('salvar_button')
+var botaoExcluir=document.getElementsByClassName('botaoExcluir')
 
 window.addEventListener('click', function(event) {
-    if (/*event.target !== lista_suspensa && */event.target !== btn_menu && event.target !== modal_corpo && event.target !== add && event.target !== nome_lista && event.target !== pastas_tipos_exames && event.target !== nome_lista && event.target !== list_created && event.target !== upload_exame && event.target !== file_exame && event.target !== inserir_upload&& event.target !== camera_svg && event.target !== inserir_upload&& event.target !== trocarCamera) {
-        /*lista_suspensa.style.display = "none";*/
-        modal_corpo.style.display = 'none';
-        nome_lista.style.display='none';
-        pastas_tipos_exames.style.display='none';
-        nome_lista.style.display='none';
-        list_created.style.display='none';
-        upload_exame.style.display='none';
-        file_exame.style.display='none';
-        inserir_upload.style.display='none';
-        exames.style.display='none';
-        camera_svg.style.display='none';
-    
+    if (!isInsideElementWithClass(event.target, 'botaoExcluir')) {
+        // Código para ocultar elementos
+        nome_lista.style.display = 'none';
+        pastas_tipos_exames.style.display = 'none';
+        nome_lista.style.display = 'none';
+        list_created.style.display = 'none';
+        file_exame.style.display = 'none';
+        inserir_upload.style.display = 'none';
+        exames.style.display = 'none';
+        /*camera_svg.style.display='none';*/
+        /*upload_exame.style.display = 'none';
+        data_exame.style.display = 'none';
+        nome_doc_exame.style.display = 'none';
+        botaoExcluir.style.display = 'none';
+        salvar_button = 'none';
 
         document.getElementById('msg_inicial').style.display = 'block';
-
     }
-    if (event.target === camera_svg){
+    if (event.target === camera_svg) {
         document.getElementById('msg_inicial').style.display = 'none';
-
     }
-});
+    if (event.target === salvar_button) {
+        document.getElementById('upload_exame').style.display = 'none';
+        document.getElementById('relacao_exames').style.display = 'none';
+        document.getElementById('grupos').style.display = 'block';
+    }
 
-var inputs = document.querySelectorAll('#corpo input');
-inputs.forEach(function(input) {
-    input.addEventListener('click', function(event) {
-        event.stopPropagation();
-    });
-});
+}); */
 
-/* Objetivo: interatividade no botão */
-/* Declaração das variáveis */
-var a;
-var b;
-var lista_tarefas;
-
-/* Entrada de dados */
-/* PRIMEIRO BOTAO */
-/* Relacionar qual botão */
-a = document.getElementsByClassName('f_botao')[0];
-
-/* Saída de dados */
-/* Adicionar evento aos botões */
-a.addEventListener('click', inserir);
+function isInsideElementWithClass(element, className) {
+    while (element) {
+        if (element.classList && element.classList.contains(className)) {
+            return true;
+        }
+        element = element.parentElement;
+    }
+    return false;
+}
 
 /* OBJETIVO: INSERIR ELEMENTO DOM */
 /* Entrada de dados */
-// Invalidar campo vazio
-function inserir() {
-    var texto1 = document.getElementById('item_usuario1').value;
-    var texto3 = document.getElementById('item_usuario3').value;
-
-    if (texto3 !== "" && texto1 !== "") {
-        a.style.background = 'lightgray';
-        a.value = 'INSERIDO';
-
-        var item = document.createElement('li');
-        var checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        var valor_item = document.createElement('input');
-        valor_item.type = 'TEXT';
-        valor_item.placeholder = 'R$';
-        var unidades = document.createElement('span');
-
-        item.className = 'item';
-        checkbox.className = 'li_checkbox';
-        valor_item.className = 'valor_item';
-        unidades.className = 'unidades';
-
-        unidades.appendChild(document.createTextNode(texto1));
-        item.appendChild(checkbox);
-        item.appendChild(unidades);
-        item.appendChild(document.createTextNode(' ' + texto3));
-        item.appendChild(valor_item);
-        adicionarBotaoExcluir(item);
-        document.getElementById('list_created').style.display = 'block';
-
         function adicionarBotaoExcluir(liItem) {
             var botaoExcluir = document.createElement('span');
             botaoExcluir.className = 'botao-excluir';
             botaoExcluir.textContent = '❌';
             botaoExcluir.addEventListener('click', function() {
                 liItem.remove();
-
-                var lista = document.getElementById('f_lista');
-                if (lista.children.length === 0) {
-                    document.getElementById('list_created').style.display = 'none';
-                    checkListaVazia();
-                } else {
-                    document.getElementById('list_created').style.display = 'block';
-                }
             });
             liItem.appendChild(botaoExcluir);
         }
-
-        checkbox.addEventListener('click', function() {
-            var liItem = this.parentElement;
-            if (this.checked) {
-                liItem.style.textDecoration = 'line-through';
-                lista_tarefas.removeChild(liItem);
-                lista_tarefas.appendChild(liItem);
-            } else {
-                liItem.style.textDecoration = 'none';
-                lista_tarefas.removeChild(liItem);
-                lista_tarefas.insertBefore(liItem, lista_tarefas.firstChild);
-            }
-        });
-
-        var lista_tarefas = document.getElementById('f_lista');
-        lista_tarefas.appendChild(item);
-
-        document.getElementById('item_usuario3').value = "";
-        document.getElementById('item_usuario1').value = "";
-
-        setTimeout(function() {
-            a.style.background = 'lightblue';
-            a.style.color = 'black';
-            a.value = 'INSERIR';
-        }, 300);
-    } else {
-        window.alert('Inserir dados do item!');
-    }
-    checkListaVazia();
-}
-
-/* OBJETIVO: Quando clicar Enter, inserir item */
-var input_text;
-
-input_text = document.getElementById('item_usuario3');
-input_text.addEventListener('keydown', clicou_enter);
-
-function clicou_enter(tecla) {
-    if (tecla.key == 'Enter') {
-        inserir();
-    }
-}
-
-// Adicione um evento de clique a todos os checkboxes
-var checkboxes = document.querySelectorAll('.li_checkbox');
-
-checkboxes.forEach(function(checkbox) {
-    checkbox.addEventListener('click', function() {
-    });
-});
-
+        function atribuirEventoExcluir() {
+            var botoesExcluir = document.querySelectorAll('.botao-excluir');
+        
+            botoesExcluir.forEach(function(botao) {
+                botao.addEventListener('click', function() {
+                    var liItem = this.parentElement;
+                    liItem.remove();
+                });
+            });
+        }
 /*---------------------------------------------------------------- */
 /*evento ao clicar no botão adicionar na tela inicial*/
 document.getElementById('add').addEventListener('click', function() {
@@ -187,52 +104,8 @@ document.getElementById('add').addEventListener('click', function() {
 });
 /*---------------------------------------------------------------- */
 
-document.getElementById('fechar-corpo').addEventListener('click', function() {
-    document.getElementById('corpo').style.display = 'none';
-    var lista = document.getElementById('f_lista');
-    if (lista.children.length === 0) {
-        checkListaVazia();
-    } else {
-        document.getElementById('list_created').style.display = 'block';
-    }
-});
-
-document.getElementById('fechar-lista-nome').addEventListener('click', function() {
-    document.getElementById('nome_lista').style.display = 'none';
-    document.getElementById('input_nome').value="";
-    fechar();
-});
-
 function fechar(){
     document.getElementById('msg_inicial').style.display = 'block';
-}
-
-document.getElementById('fechar-list_created').addEventListener('click', function() {
-console.log('Botão de fechamento clicado')
-document.getElementById('list_created').style.display = 'none';
-console.log('Minimizado!')
-
-    /*var lista = document.getElementById('f_lista');
-    if (lista.children.length === 0) {
-        checkListaVazia();
-    } else {
-        document.getElementById('list_created').style.display = 'block';
-    }*/
-    checkListaVazia();
-});
-
-function checkListaVazia() {
-
-    if (lista.children.length === 0) {
-        msgInicial.style.display = 'block';
-        return true;
-    } else {
-        msgInicial.style.display = 'none';
-        document.getElementById('corpo').addEventListener('click', function() {
-            document.getElementById('corpo').style.display = 'block';
-        });
-        return false;
-    }
 }
 
 var nome_lista = document.getElementById('nome_lista');
@@ -278,85 +151,6 @@ document.getElementById('link-sobre_app').addEventListener('click', function() {
 document.getElementById('fechar-sobre_app').addEventListener('click', function() {
     document.getElementById('sobre_app-modal').style.display = 'none';
 });
-//criar salvamento da lista
-// Função para exibir as listas salvas quando o link "LISTAS" for clicado
-// Array global para armazenar listas salvas
-let listasSalvas = JSON.parse(localStorage.getItem("minhas_listas")) || [];
-
-// Função para carregar e exibir a lista selecionada
-function carregarListaSelecionada(index) {
-    const listaSelecionada = listasSalvas[index];
-    if (listaSelecionada) {
-        document.getElementById("list_created").innerHTML = listaSelecionada;
-        document.getElementById("listas-salvas").style.display = "none";
-        document.querySelector("#list_created h1").textContent = `Lista ${index + 1}`;
-        /*checkListaVazia();*/
-        atribuirEventoExcluir()
-        adicionarFuncionalidadeAItensCarregados();
-    };
-}
-
-
-function atribuirEventoExcluir() {
-    var botoesExcluir = document.querySelectorAll('.botao-excluir');
-
-    botoesExcluir.forEach(function(botao) {
-        botao.addEventListener('click', function() {
-            var liItem = this.parentElement;
-            liItem.remove();
-        });
-    });
-}
-
-function exibirListasSalvas() {
-
-    const listaDropdown = document.getElementById("listas-salvas");
-
-    listaDropdown.innerHTML = ""; // Limpar itens anteriores
-
-    listasSalvas.forEach((lista, index) => {
-        const listItem = document.createElement("li");
-        const link = document.createElement("a");
-        link.href = "#";
-        link.classList.add("minhas_listas_salvas");
-        link.textContent = `Lista ${index + 1}`;
-        link.addEventListener("click", () => {
-            carregarListaSelecionada(index); // Carregar a lista selecionada
-            msgInicial.style.display = 'none'; // Esconder msgInicial ao clicar na lista
-        });
-        listItem.appendChild(link);
-        listaDropdown.appendChild(listItem);
-    });
-
-    var msgInicial = document.getElementById('msg_inicial');
-
-}
-
-
-
-    document.getElementById('excluir-list_created').addEventListener('click', function() {
-        var listaParaExcluir = document.getElementById('list_created'); // Obtém o elemento lista_created
-        listaParaExcluir.remove();
-        
-        var listaSalvaIndex = -1; // Inicialize o índice da lista a ser removida como -1
-
-        // Percorra as listas salvas no armazenamento local e encontre a correspondente à lista que está sendo fechada
-        var listasSalvas = JSON.parse(localStorage.getItem("minhas_listas")) || [];
-        listasSalvas.forEach(function(lista, index) {
-            if (lista === listaParaExcluir.innerHTML) {
-                listaSalvaIndex = index; // Encontrou a lista, armazena o índice
-            }
-        });
-    
-        // Remove a lista do armazenamento local usando o índice encontrado
-        if (listaSalvaIndex !== -1) {
-            listasSalvas.splice(listaSalvaIndex, 1); // Remove a lista do array
-            localStorage.setItem("minhas_listas", JSON.stringify(listasSalvas)); // Atualiza o armazenamento local
-        }      
-    
-    var msgInicial = document.getElementById('msg_inicial');
-        msgInicial.style.display = 'block';
-    });
 
 
     /*quando clicar na pasta do tipo do exame a ser inserido, abrir pasta */
@@ -387,95 +181,178 @@ function exibirListasSalvas() {
         }
     });
     
-    // abrir câmera
-    var cameraSVG = document.getElementById('camera_svg');
 
-        // Adicione um ouvinte de eventos de clique
-        cameraSVG.addEventListener('click', function () {
-            // Verifique se o navegador suporta a API MediaDevices
-            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-                // Solicite permissão para acessar a câmera do dispositivo
-                navigator.mediaDevices.getUserMedia({ video: true })
-                    .then(function (stream) {
-                        // Sucesso: A câmera foi aberta com sucesso, você pode usar o fluxo de vídeo (stream) aqui
-                        console.log("Câmera aberta com sucesso!");
-
-                        // Exemplo: exibir o fluxo de vídeo em um elemento HTML de vídeo
-                        const videoElement = document.createElement('video');
-                        videoElement.srcObject = stream;
-                        videoElement.autoplay = true;
-
-                        const uploadExameDiv = document.getElementById('upload_exame');
-
-                            // Verifique se o elemento upload_exame foi encontrado
-                            if (uploadExameDiv) {
-                                // Anexe o vídeo ao elemento upload_exame
-                                uploadExameDiv.appendChild(videoElement);
-                            } else {
-                                console.error("Elemento upload_exame não encontrado.");
-                            }
-                     // Importante: Certifique-se de fechar a câmera quando você não a estiver usando mais
-                        // Para isso, você pode adicionar um botão "Fechar Câmera" ou realizar esta ação com base no seu fluxo de aplicativo.
-                    })
-                    .catch(function (error) {
-                        // Erro: Não foi possível acessar a câmera ou o usuário negou a permissão
-                        console.error("Erro ao abrir a câmera:", error);
-                    });
-            } else {
-                // Navegador não suporta a API MediaDevices
-                console.error("Seu navegador não suporta a API MediaDevices.");
-            }
-        });
-    
-//criação do elemento dom <li> com a imagem de upload
+//--------------------------------------------------------------
 document.addEventListener("DOMContentLoaded", function () {
     const inserirUploadButton = document.getElementById("inserir_upload");
     const fileExameInput = document.getElementById("file_exame");
     const relacaoExamesDiv = document.getElementById("relacao_exames");
     const examesList = document.getElementById("exames");
+    const nomeDocInput = document.getElementById("nome_doc_exame");
+    const dataInput = document.getElementById("data_exame");
+    const salvarButton = document.getElementById("salvar_button"); 
+    const inputNome = document.getElementById("input_nome");
 
+    // Evento de clique para inserir o documento com nome e data
     inserirUploadButton.addEventListener("click", function () {
-        // Verifique se o input de file_exame não está vazio
-        if (fileExameInput.files.length > 0) {
+        // Impedir entrada vazia de arquivos
+        if (fileExameInput.files.length > 0 && nomeDocInput.value !== "" && dataInput.value !== "") {
             const file = fileExameInput.files[0];
+            const dataInputValue = dataInput.value;
 
-            // Crie um elemento <li>
+            // Formate a data no estilo brasileiro (dia, mês, ano)
+            const dataFormatada = formatarDataBrasileira(dataInputValue);
+
             const newLi = document.createElement("li");
-
-            // Crie um elemento <a> para o nome do arquivo
             const linkElement = document.createElement("a");
-            linkElement.textContent = file.name;
-            linkElement.href = URL.createObjectURL(file); // Define o href do link como o arquivo
-            linkElement.target = "_blank"; // Abre o link em uma nova guia
 
-            // Adicione a classe "imagem_inserida" ao elemento <a>
-            linkElement.classList.add("imagem_inserida");
+            linkElement.textContent = dataFormatada + " " + nomeDocInput.value;
+            linkElement.href = URL.createObjectURL(file);
+            linkElement.target = "_blank";
+            linkElement.classList.add("imagem_inserida_link");
 
-            // Anexe o link ao elemento <li>
             newLi.appendChild(linkElement);
-
-            // Adicione a classe "imagem_inserida" à <li>
             newLi.classList.add("imagem_inserida");
-
-            // Adicione o elemento <li> à lista de exames
+            adicionarBotaoExcluir(newLi);
             examesList.appendChild(newLi);
 
-            // Limpe o valor do input de file_exame
             fileExameInput.value = "";
-
-            // Exiba a div relacao_exames
             relacaoExamesDiv.style.display = "block";
+
+            // Limpe os campos de entrada após a inserção
+            nomeDocInput.value = "";
+            dataInput.value = "";
+        } else {
+            // Exibir mensagem de erro se algum campo estiver vazio
+            alert("Por favor, preencha todos os campos obrigatórios.");
+        }
+    });
+//----------------------------SALVAR DOCS-------------------
+    // Evento de clique para salvar os dados no localStorage
+    salvarButton.addEventListener("click", function () {
+        // Obtenha o nome da pasta do usuário
+        const nomeDaPasta = inputNome.value.trim();
+
+        // Verifique se o nome da pasta não está vazio
+        if (nomeDaPasta !== "") {
+            // Obtenha o conteúdo da lista <ol> com id "exames"
+            const examesItems = examesList.querySelectorAll("li");
+
+            // Crie um array para armazenar os itens da lista
+            const listaDeExames = [];
+
+            // Percorra os itens da lista e adicione seus textos ao array
+            examesItems.forEach(function (item) {
+                listaDeExames.push(item.textContent);
+            });
+
+            // Converta o array em uma string JSON
+            const listaJSON = JSON.stringify(listaDeExames);
+
+            // Salve a lista na pasta nomeada pelo usuário no localStorage
+            localStorage.setItem(nomeDaPasta, listaJSON);
+
+            // Limpe o campo de entrada do nome da pasta
+            inputNome.value = "";
+
+            // Exiba uma mensagem de sucesso ou faça qualquer outra ação necessária
+            alert("Exames salvos com sucesso na pasta " + nomeDaPasta);
+
+            // Crie um novo item na lista de grupos com um link para abrir o conteúdo
+            const listaGrupos = document.getElementById("lista_grupos");
+            const novoGrupoItem = document.createElement("ol");
+            const linkParaConteudo = document.createElement("a");
+            linkParaConteudo.className="Grupo";
+            linkParaConteudo.textContent = nomeDaPasta;
+            linkParaConteudo.href = "#"; 
+
+                // Recupere o conteúdo da pasta no localStorage usando localStorage.getItem(nomeDaPasta)
+                const conteudoSalvo = localStorage.getItem(nomeDaPasta);
+
+                // Verifique se há conteúdo na pasta
+                if (conteudoSalvo) {
+                    // Converta o conteúdo de volta para o formato adequado (por exemplo, uma matriz)
+                    const listaDeExamesSalva = JSON.parse(conteudoSalvo);
+
+                    // Aqui, você pode fazer o que quiser com o conteúdo salvo, como exibi-lo na página
+                    // Por exemplo, você pode criar uma lista e adicionar cada item da listaDeExamesSalva a ela.
+                    // Vou apenas exibir um alert com o conteúdo para fins de demonstração:
+                    alert("Conteúdo da pasta " + nomeDaPasta + ":\n" + listaDeExamesSalva.join("\n"));
+                } else {
+                    alert("A pasta " + nomeDaPasta + " está vazia.");
+                }
+            
+            novoGrupoItem.appendChild(linkParaConteudo);
+            listaGrupos.appendChild(novoGrupoItem);
+            
+            checkListaGruposVazia()
+        } else {
+            // Exiba uma mensagem de erro se o nome da pasta estiver vazio
+            alert("Por favor, insira um nome para a pasta.");
         }
     });
 
-    // Evento de clique para abrir a imagem ao clicar na <li> com a classe "imagem_inserida"
-    examesList.addEventListener("click", function (event) {
-        if (event.target.classList.contains("imagem_inserida")) {
-            // Abra a imagem em uma nova guia ao clicar na <li>
-            window.open(event.target.href, "_blank");
-            event.preventDefault(); // Evite o comportamento padrão do link
+    function formatarDataBrasileira(data) {
+        // Divida a data em partes: ano, mês, dia
+        const partes = data.split('-');
+
+        // Verifique se há três partes (ano, mês, dia)
+        if (partes.length === 3) {
+            const dia = partes[2];
+            const mes = partes[1];
+            const ano = partes[0];
+
+            // Crie uma nova data no formato "dia/mês/ano"
+            const dataFormatada = dia + '-' + mes + '-' + ano;
+
+            return dataFormatada;
+        } else {
+            // Se o formato da data estiver incorreto, retorne a data original
+            return data;
         }
-    });
+    }
+});
+
+//------------------------------------------------------------
+/*
+// abrir câmera
+var cameraSVG = document.getElementById('camera_svg');
+
+// Adicione um ouvinte de eventos de clique
+cameraSVG.addEventListener('click', function () {
+    // Verifique se o navegador suporta a API MediaDevices
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        // Solicite permissão para acessar a câmera do dispositivo
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(function (stream) {
+                // Sucesso: A câmera foi aberta com sucesso, você pode usar o fluxo de vídeo (stream) aqui
+                console.log("Câmera aberta com sucesso!");
+
+                // Exemplo: exibir o fluxo de vídeo em um elemento HTML de vídeo
+                const videoElement = document.createElement('video');
+                videoElement.srcObject = stream;
+                videoElement.autoplay = true;
+
+                const uploadExameDiv = document.getElementById('upload_exame');
+
+                    // Verifique se o elemento upload_exame foi encontrado
+                    if (uploadExameDiv) {
+                        // Anexe o vídeo ao elemento upload_exame
+                        uploadExameDiv.appendChild(videoElement);
+                    } else {
+                        console.error("Elemento upload_exame não encontrado.");
+                    }
+             // Importante: Certifique-se de fechar a câmera quando você não a estiver usando mais
+                // Para isso, você pode adicionar um botão "Fechar Câmera" ou realizar esta ação com base no seu fluxo de aplicativo.
+            })
+            .catch(function (error) {
+                // Erro: Não foi possível acessar a câmera ou o usuário negou a permissão
+                console.error("Erro ao abrir a câmera:", error);
+            });
+    } else {
+        // Navegador não suporta a API MediaDevices
+        console.error("Seu navegador não suporta a API MediaDevices.");
+    }
 });
 
 //camera traseira
@@ -535,5 +412,27 @@ function abrirCamera(camera) {
             });
     } else {
         console.error('Seu navegador não suporta a API MediaDevices.');
+    }
+} */
+
+/*--------------VERIFICAR SE O PRONTUÁRIO ESTÁ VAZIO---------- */
+
+function checkListaGruposVazia() {
+    var listaGrupos = document.getElementById('lista_grupos');
+    var msgInicial = document.getElementById('msg_inicial');
+
+    if (listaGrupos.children.length === 0) {
+        msgInicial.style.display = 'block';
+        return true;
+    } else { 
+        msgInicial.style.display = 'none';
+            document.getElementById('lista_grupos').style.display = 'block';
+            
+            document.getElementById('grupos').style.display = 'block';
+            
+            document.getElementById('upload_exame').style.display = 'none';
+            document.getElementById('relacao_exames').style.display = 'none';
+        return false;
+
     }
 }

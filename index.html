@@ -62,8 +62,8 @@
         </div>
         <div id="nome_lista" class="modal-content" style="display: none;">
             <span class="close" id="fechar-lista-nome">×</span>
-            <h2>Insira o nome do seu prontuário!</h2>
-            <input id="input_nome" type="text" required placeholder="Dica: Hipotiroidismo">
+            <h2>Insira o nome da sua pasta!</h2>
+            <input id="input_nome" type="text" required placeholder="Ex: Exames de 2023">
             <br><input type="button" id="btn-nome" value="CRIAR LISTA" class="btn">
         </div>
 <!------------------------------------------------------------->
@@ -88,39 +88,35 @@
         </div>
         
         <!--div referente a upload de exames-->
-        <div id="upload_exame" style="display: none;">
-            <svg id="camera_svg" xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+       <form id="upload_exame" style="display: none;">
+             <!--<svg id="camera_svg" xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
                 <circle cx="32" cy="32" r="30" stroke="black" stroke-width="2" fill="none" />
                 <path d="M32 48c-7.718 0-14-6.282-14-14s6.282-14 14-14 14 6.282 14 14-6.282 14-14 14zm0-26c-5.523 0-10 4.477-10 10s4.477 10 10 10 10-4.477 10-10-4.477-10-10-10z" stroke="black" stroke-width="2" fill="none" />
                 <circle cx="32" cy="32" r="4" stroke="black" stroke-width="2" fill="none" />
-            </svg>
+            </svg>-->
               
-            <input type="file" id="file_exame">
+            <br><input type="file" id="file_exame" required>
+            <br><label for="nome_doc_exame">
+                Nome do documento:
+            </label>
+            <br><input type="text" id="nome_doc_exame" required>
+            <br>Data do exame:<br>
+            <input type="date" id="data_exame" required>
+            <br>
             <button id="inserir_upload" class="btn">Inserir documento</button>
-            <button id="trocarCamera" class="btn">Trocar Câmera</button>
-        </div>
+             <!--<button id="trocarCamera" class="btn">Trocar Câmera</button>-->
+        </form>
 
-        <!--lista de documentos de exames-->
         <div id="relacao_exames" style="display: none;">
             <ol id="exames">
             </ol>
+            <button id="salvar_button">Salvar</button>
         </div>
-<!------------------------------------------------------------->
-
-        <div id="corpo" class="modal-content" style="display: none;">
-            <span class="close" id="fechar-corpo">×</span>
-            <span>
-                <label for="item_usuario1">QNT</label>
-                <br><input type="number" id="item_usuario1" placeholder="1,.." required>
-            </span>
-            <span>
-                <label for="item_usuario3">ITEM</label>
-                <br><input type="text" id="item_usuario3" name="item_usuario" placeholder="Arroz, feijão...">
-            </span>
-            <br>
-            <input type="button" class="f_botao" value="INSERIR">
+        
+        <div id="grupos" style="display: none;">
+            <ol id="lista_grupos">
+            </ol>
         </div>
-
         
         <div id="list_created" style="display: none;">
             <span class="close" id="fechar-list_created">&times;</span>
