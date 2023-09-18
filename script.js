@@ -66,12 +66,13 @@ function fechar() {
     var nome_lista=document.getElementById('nome_lista');
     /*var pastas_tipos_exames=document.getElementById('pastas_tipos_exames');*/
     var upload_exame=document.getElementById('upload_exame');
-    
+    var novo_elemento=document.getElementById('novo_elemento')
        
         sobre_app_modal.style.display = 'none';
         nome_lista.style.display = 'none';  
         /*pastas_tipos_exames.style.display='none'; */ 
         upload_exame.style.display='none';
+        novo_elemento.style.display='none';
 
     checkListaGruposVazia()
 }
@@ -187,42 +188,52 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             });
         });
-    // Evento de clique para inserir o documento com nome e data
-    inserirUploadButton.addEventListener("click", function () {
+        inserirUploadButton.addEventListener("click", function () {
+            // Impedir entrada vazia de arquivos
+            if (fileExameInput.files.length > 0 && nomeDocInput.value !== "" && dataInput.value !== "") {
+                const file = fileExameInput.files[0];
+                const dataInputValue = dataInput.value;
         
-        // Impedir entrada vazia de arquivos
-        if (fileExameInput.files.length > 0 && nomeDocInput.value !== "" && dataInput.value !== "") {
-            const file = fileExameInput.files[0];
-            const dataInputValue = dataInput.value;
-
-            // Formate a data no estilo brasileiro (dia, mês, ano)
-            const dataFormatada = formatarDataBrasileira(dataInputValue);
-
-            const newLi = document.createElement("li");
-            const linkElement = document.createElement("a");
-
-            linkElement.textContent = dataFormatada + " " + nomeDocInput.value;
-            linkElement.href = URL.createObjectURL(file);
-            linkElement.target = "_blank";
-            linkElement.classList.add("imagem_inserida_link");
-
-            newLi.appendChild(linkElement);
-            newLi.classList.add("imagem_inserida");
-            adicionarBotaoExcluir(newLi);
-            examesList.appendChild(newLi);
-
-            fileExameInput.value = "";
-            relacaoExamesDiv.style.display = "block";
-
-            // Limpe os campos de entrada após a inserção
-            nomeDocInput.value = "";
-            dataInput.value = "";
-        } else {
-            // Exibir mensagem de erro se algum campo estiver vazio
-            alert("Por favor, preencha todos os campos obrigatórios.");
-        }
-        document.getElementById('msg_inicial').style.display='none';
-    });
+                // Formate a data no estilo brasileiro (dia, mês, ano)
+                const dataFormatada = formatarDataBrasileira(dataInputValue);
+        
+                const newLi = document.createElement("li");
+                const linkElement = document.createElement("a");
+                linkElement.href = URL.createObjectURL(file);
+                linkElement.target = "_blank";
+                linkElement.classList.add("imagem_inserida_link");
+        
+                // Crie um <span> para a data formatada com uma classe específica
+                const dataSpan = document.createElement("span");
+                dataSpan.textContent = dataFormatada;
+                dataSpan.classList.add("data-formatada"); // Adicione uma classe específica
+        
+                // Crie um <span> para o nome do documento com outra classe específica
+                const nomeSpan = document.createElement("span");
+                nomeSpan.textContent = nomeDocInput.value;
+                nomeSpan.classList.add("nome-documento"); // Adicione uma classe específica
+        
+                linkElement.appendChild(dataSpan); // Adicione o <span> da data dentro da <a>
+                linkElement.appendChild(nomeSpan); // Adicione o <span> do nome do documento dentro da <a>
+        
+                newLi.appendChild(linkElement);
+                newLi.classList.add("imagem_inserida");
+                adicionarBotaoExcluir(newLi);
+                examesList.appendChild(newLi);
+        
+                fileExameInput.value = "";
+                relacaoExamesDiv.style.display = "block";
+        
+                // Limpe os campos de entrada após a inserção
+                nomeDocInput.value = "";
+                dataInput.value = "";
+            } else {
+                // Exibir mensagem de erro se algum campo estiver vazio
+                alert("Por favor, preencha todos os campos obrigatórios.");
+            }
+            document.getElementById('msg_inicial').style.display='none';
+        });
+        
 //----------------------------SALVAR DOCS-------------------
 // Evento de clique para salvar os dados no localStorage
 salvarButton.addEventListener("click", function () {
@@ -255,7 +266,35 @@ salvarButton.addEventListener("click", function () {
                 checkListaGruposVazia();
             }
         });
+        //botão adicionar documento na pasta já criada
+ 
 
+//------------------------------------------------------------
+
+ // Evento de clique para adicionar documento à pasta
+ 
+const btn_adicionar_doc = document.createElement("button");
+btn_adicionar_doc.className = "btn_adicionar_doc";
+btn_adicionar_doc.textContent = "➕";
+
+btn_adicionar_doc.addEventListener("click", function () {
+    const novoElementoDiv = document.getElementById("novo_elemento");
+
+    novoElementoDiv.style.display = "block";
+
+    const inserirUpload2Button = novoElementoDiv.getElementById("inserir_upload2");
+
+    inserirUpload2Button.addEventListener("click", function () {
+        const novoLiArquivo = document.createElement("li");
+        novoLiArquivo.className = "Arquivo";
+        const grupoPai = this.closest(".Grupo");
+
+        grupoPai.appendChild(novoLiArquivo);
+    });
+});
+
+
+//------------------------------------------------------------
 
         // Coloque o nome da pasta diretamente dentro da <li>
         novoGrupoItem.textContent = nomeDaPasta;
@@ -272,6 +311,8 @@ salvarButton.addEventListener("click", function () {
 
         // Anexe os elementos clonados em uma estrutura de árvore
         novoGrupoItem.appendChild(toggleButton); // Adicione o botão de expansão/recolhimento
+        
+        novoGrupoItem.appendChild(btn_adicionar_doc);
         novoGrupoItem.appendChild(btn_excluir_grupo);
         novoGrupoItem.appendChild(examesOlClone);
         listaGrupos.appendChild(novoGrupoItem);
@@ -280,6 +321,8 @@ salvarButton.addEventListener("click", function () {
         toggleButton.addEventListener("click", function () {
             toggleList(examesOlClone);
         });
+
+        atribuirEventoExcluir() 
 
         // Adicione a classe "Arquivo" e remova a classe "imagem_inserida" da <li>
         const imagensInseridasLi = examesOlClone.querySelectorAll("li.imagem_inserida");
@@ -290,9 +333,14 @@ salvarButton.addEventListener("click", function () {
         // Você pode continuar com o restante do seu código, como salvar no localStorage, limpar o campo de entrada, etc.
 
         checkListaGruposVazia();
+
+        alert('Pasta gerada com sucesso!')
+
+        fechar()
     } else {
         // Exiba uma mensagem de erro se o nome da pasta estiver vazio
         alert("Por favor, insira um nome para a pasta.");
+
     }
 });
 

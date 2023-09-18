@@ -90,8 +90,16 @@ nav button {
     padding-left: 24px;
 }
 .btn-excluir-grupo{
+    right: 55px;
+    position: fixed;
+}
+.toggle-button{
     right: 18px;
     position: fixed;
+}
+.btn_adicionar_doc{
+    position: fixed;
+    right: 97px;
 }
 #btn-menu {
     display: inline-block;
@@ -239,7 +247,7 @@ main span {
     font-size: 16px;
 }
 #nome_doc_exame{
-    padding: 10px 50px;
+    padding: 10px 40px;
 }
 
 .input_nome {
@@ -306,6 +314,8 @@ ol {
     margin-top: 10px;
     margin-bottom: 10px;
     cursor: pointer;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    justify-content: space-between;
 }
 .data_exame{
     padding: 10px 50px;
@@ -324,7 +334,11 @@ ol {
 .imagem_inserida{
     margin-bottom: 15px;
 }
-
+.data-formatada{
+position:fixed;
+left:25px;
+background-color: #dfd9d9;
+}
 .f_botao {
     background-color: lightblue;
     color: black;
@@ -332,6 +346,10 @@ ol {
     margin-top: 10px;
     margin-bottom: 10px;
     cursor: pointer;
+}
+.botao-excluir{
+    position: fixed;
+    right: 18px;
 }
 
 .f_botao:hover {

@@ -65,8 +65,40 @@
                 <span class="close" id="fechar-lista-nome">×</span>
                 <h2>Insira o nome da sua pasta!</h2>
                 <input id="input_nome" type="text" placeholder="Ex: Exames de 2023" value="2023">
-                <br><input type="button" id="btn-nome" value="CRIAR PASTA" class="btn">
+                <br><input type="button" id="btn-nome" value="PRÓXIMO" class="btn">
             </div>
+        </div>
+        <div id="novo_elemento" class="modal" style="display:none;">
+            <form class="modal-content">
+                <span class="close" id="fechar-novo_elemento">×</span>
+                    <!--<svg id="camera_svg" xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+                        <circle cx="32" cy="32" r="30" stroke="black" stroke-width="2" fill="none" />
+                        <path d="M32 48c-7.718 0-14-6.282-14-14s6.282-14 14-14 14 6.282 14 14-6.282 14-14 14zm0-26c-5.523 0-10 4.477-10 10s4.477 10 10 10 10-4.477 10-10-4.477-10-10-10z" stroke="black" stroke-width="2" fill="none" />
+                        <circle cx="32" cy="32" r="4" stroke="black" stroke-width="2" fill="none" />
+                    </svg>-->
+                    <h2>
+                        Insira os documentos na pasta selecionada
+                    </h2>
+                    <br><input type="file" id="file_exame2" required >
+                    <br><label for="nome_doc_exame2">
+                        Nome do documento:
+                    </label>
+                    <br><input type="text" id="nome_doc_exame2" name="nome_doc_exame2" required placeholder="Ex: Exame de sangue" value="EXAME DE SANGUE">
+                    <br><label for="data_exame2">
+                    <br>Data do exame:<br>
+                    </label>
+                    <input type="date" id="data_exame2" name="data_exame2" required value="2023-09-17">
+                    <br>
+                    <button id="inserir_upload2" name="inserir_upload2" class="btn">Inserir documento</button>
+                    <!--<button id="trocarCamera" class="btn">Trocar Câmera</button>-->
+                    
+                    <div id="relacao_exames2" style="display: none;">
+                        <ol id="exames2">
+                        </ol>
+                        <button id="salvar_button2" class="btn">Salvar na pasta</button>
+                    </div>
+                    
+                </form>         
         </div>
         
 <!------------------------------------------------------------->
@@ -102,8 +134,10 @@
                     <path d="M32 48c-7.718 0-14-6.282-14-14s6.282-14 14-14 14 6.282 14 14-6.282 14-14 14zm0-26c-5.523 0-10 4.477-10 10s4.477 10 10 10 10-4.477 10-10-4.477-10-10-10z" stroke="black" stroke-width="2" fill="none" />
                     <circle cx="32" cy="32" r="4" stroke="black" stroke-width="2" fill="none" />
                 </svg>-->
-                
-                <br><input type="file" id="file_exame" required>
+                <h2>
+                    Insira os documentos da pasta!
+                </h2>
+                <br><input type="file" id="file_exame" required >
                 <br><label for="nome_doc_exame">
                     Nome do documento:
                 </label>
