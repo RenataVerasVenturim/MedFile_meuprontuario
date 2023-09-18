@@ -317,7 +317,7 @@ ol {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     justify-content: space-between;
 }
-.data_exame{
+#data_exame{
     padding: 10px 50px;
 }
 .imagem_inserida a{
@@ -335,9 +335,8 @@ ol {
     margin-bottom: 15px;
 }
 .data-formatada{
-position:fixed;
-left:25px;
 background-color: #dfd9d9;
+color:black;
 }
 .f_botao {
     background-color: lightblue;
@@ -348,8 +347,6 @@ background-color: #dfd9d9;
     cursor: pointer;
 }
 .botao-excluir{
-    position: fixed;
-    right: 18px;
 }
 
 .f_botao:hover {
