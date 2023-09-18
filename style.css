@@ -300,7 +300,7 @@ ol {
     cursor: pointer;
 }
 .Arquivo {
-    background-color: rgb(46, 168, 209);
+    background-color:white;
     color: white;
     padding: 6px 26px;
     margin-top: 10px;
@@ -319,6 +319,7 @@ ol {
         cursor: pointer;   
         border:1px solid black;
         border-radius: 10px;
+        font-size:16px;
 }
 .imagem_inserida{
     margin-bottom: 15px;
@@ -337,7 +338,9 @@ ol {
     padding: 8px 28px;
 }
 .Arquivo a{
-    color:white;
+
+    color: black;
+    font-size: 16px;
 }
 
 .minhas_listas_salvas{
