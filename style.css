@@ -335,6 +335,7 @@ ol {
     margin-bottom: 15px;
 }
 .data-formatada{
+left:25px;
 background-color: #dfd9d9;
 color:black;
 }
@@ -346,6 +347,7 @@ color:black;
     margin-bottom: 10px;
     cursor: pointer;
 }
+
 .f_botao:hover {
     padding: 8px 28px;
 }

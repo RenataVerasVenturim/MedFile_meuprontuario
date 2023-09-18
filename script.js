@@ -35,6 +35,7 @@ function isInsideElementWithClass(element, className) {
             liItem.appendChild(botaoExcluir);
         }
         function atribuirEventoExcluir() {
+            
             var botoesExcluir = document.querySelectorAll('.botao-excluir');
         fechar
             botoesExcluir.forEach(function(botao) {
@@ -43,6 +44,7 @@ function isInsideElementWithClass(element, className) {
                     liItem.remove();
                 });
             });
+        
         }
 /*---------------------------------------------------------------- */
 /*evento ao clicar no botão adicionar na tela inicial*/
@@ -266,13 +268,12 @@ salvarButton.addEventListener("click", function () {
                 checkListaGruposVazia();
             }
         });
-        //botão adicionar documento na pasta já criada
- 
+
 
 //------------------------------------------------------------
 
  // Evento de clique para adicionar documento à pasta
- 
+
 const btn_adicionar_doc = document.createElement("button");
 btn_adicionar_doc.className = "btn_adicionar_doc";
 btn_adicionar_doc.textContent = "➕";
@@ -282,17 +283,18 @@ btn_adicionar_doc.addEventListener("click", function () {
 
     novoElementoDiv.style.display = "block";
 
-    const inserirUpload2Button = novoElementoDiv.getElementById("inserir_upload2");
+    
+    btn_adicionar_doc.addEventListener("click", function () {
+        // Encontre o elemento pai <li> com a classe "Grupo"
+        const grupoPai = this.closest("li.Grupo");
+    
 
-    inserirUpload2Button.addEventListener("click", function () {
-        const novoLiArquivo = document.createElement("li");
-        novoLiArquivo.className = "Arquivo";
-        const grupoPai = this.closest(".Grupo");
-
-        grupoPai.appendChild(novoLiArquivo);
     });
+
+    
 });
 
+//-------------upload do arquivo a ser inserido na pasta existente--
 
 //------------------------------------------------------------
 
