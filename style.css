@@ -346,9 +346,6 @@ color:black;
     margin-bottom: 10px;
     cursor: pointer;
 }
-.botao-excluir{
-}
-
 .f_botao:hover {
     padding: 8px 28px;
 }
